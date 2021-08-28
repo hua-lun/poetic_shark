@@ -12,9 +12,12 @@
   "dependencies": {
     "@discordjs/builders": "^0.6.0",
     "@discordjs/rest": "^0.1.0-canary.0",
+    "alphabet": "^1.0.0",
     "discord-api-types": "^0.22.0",
     "discord.js": "^13.1.0",
+    "ikea-availability-checker": "^0.6.15",
     "jimp": "^0.16.1",
-    "mongoose": "^6.0.2"
+    "mongoose": "^6.0.2",
+    "random-number": "^0.0.9"
   }
 }
