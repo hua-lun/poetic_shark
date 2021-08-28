@@ -54,6 +54,12 @@ module.exports = {
                 .addStringOption(option => option.setName('second').setDescription('Description, limited to 26 chars')))
         .addSubcommand(subcommand =>
             subcommand
+                .setName('bench')
+                .setDescription('park bench theme')
+                .addStringOption(option => option.setName('first').setDescription('Description, limited to 26 chars'))
+                .addStringOption(option => option.setName('second').setDescription('Description, limited to 26 chars')))
+        .addSubcommand(subcommand =>
+            subcommand
                 .setName('coffeeshop')
                 .setDescription('coffeeshop theme')
                 .addStringOption(option => option.setName('first').setDescription('Description, limited to 26 chars'))
@@ -78,9 +84,21 @@ module.exports = {
 
             const user = interaction.user.id
 
-            await interaction.reply({ files: [await createMeme(theme, line1, line2, user)] })
+            const file = await createMeme(theme, line1, line2, user)
 
-            await deleteMeme(user)
+            try {
+                await interaction.reply({ files: [file] })
+            } catch (e) {
+                await interaction.reply('Server problem, please try again.')
+            }
+
+            try {
+                await deleteMeme(user)
+            } catch (e) {
+                console.log(e)
+            }
+
+
         }
     },
 };
