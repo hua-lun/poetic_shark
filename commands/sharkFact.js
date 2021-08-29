@@ -85,7 +85,7 @@ module.exports = {
                     {
                         name: 'Credits',
                         value: 'Information from wikipedia.org, extracted with npm package: wikipedia\n' +
-                            'Shark image from Kaggle User: lautoro',
+                            'Shark image from Kaggle User: lautaro',
                     }
                 ],
 
