@@ -1,7 +1,10 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageAttachment } = require('discord.js');
 const Jimp = require('jimp') ;
+const Filter = require('bad-words')
 const fs = require('fs')
+
+const filter = new Filter({placeHolder: 'x'})
 
 async function createMeme(theme, line1, line2, user) {
     // Reading image
@@ -69,7 +72,7 @@ module.exports = {
         if (interaction.commandName === 'shark') {
 
             const theme = interaction.options.getSubcommand()
-            const line1 = interaction.options.getString('first')
+            let line1 = interaction.options.getString('first')
             let line2 = interaction.options.getString('second')
 
             if (line2 === null) {
@@ -79,6 +82,9 @@ module.exports = {
             if (line1.length > 26 || line2.length > 26) {
                 await interaction.reply('Unable to process. Please ensure each line has no more than 26 chars.')
             }
+
+            line1 = filter.clean(line1)
+            line2 = filter.clean(line2)
 
             console.log(line1, line2)
 
